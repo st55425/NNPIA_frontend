@@ -1,0 +1,65 @@
+<h1>Přehled Sportovišť</h1>
+<div>
+  <p-button class="margin" type="submit" (onClick)="editReservableType()">Nový typ sportoviště</p-button>
+  <p-button class="margin" type="submit" (onClick)="editCourt()">Nové sportoviště</p-button>
+  <p></p>
+</div>
+<p-table [columns]="cols" [value]="reservableTypes" dataKey="id">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-reservableType let-expanded="expanded">
+    <tr>
+      <td>
+        <button type="button" pButton pRipple [pRowToggler]="reservableType"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+      <td>{{reservableType.name}}</td>
+      <td>{{reservableType.openFrom}}</td>
+      <td>{{reservableType.openTo}}</td>
+      <td>
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editReservableType(reservableType)"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteReservableType(reservableType)"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-reservableType>
+    <tr>
+      <td colspan="5">
+        <div class="p-p-3">
+          <p-table [value]="reservableType.reservableList" dataKey="id">
+            <ng-template pTemplate="header">
+              <!--Nechápu tuto chybu, kopírováno z https://www.primefaces.org/primeng/showcase/#/table/rowexpansion
+                  Normálně se to zkompiluje-->
+    <tr>
+      <th>Název Sportoviště</th>
+      <th>Otevřené</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-court>
+    <tr>
+      <td>{{court.name}}</td>
+      <td *ngIf="court.available">
+        Ano
+      </td>
+      <td *ngIf="!court.available">
+        Ne
+      </td>
+      <td>
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editCourt(court)"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteCourt(court)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+</p-table>

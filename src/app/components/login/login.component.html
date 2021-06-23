@@ -1,0 +1,15 @@
+<div class="p-d-flex p-jc-center p-flex-column center">
+  <form [formGroup]="formGroup" (ngSubmit)="authenticate()">
+    <div *ngIf="invalidLogin">
+      <p-message severity="error" text="Přihlašovací údaje nejsou správné"></p-message>
+    </div>
+    <h1>Přihlášení uživatele: </h1>
+    <h5>Uživatelské jméno: </h5>
+    <input type="text" pInputText formControlName="username"/>
+    <h5>Heslo: </h5>
+    <p-password type="password" [feedback]="false" [toggleMask]="true" formControlName="password"></p-password>
+    <h5></h5>
+    <p-button type="submit" [disabled]="!formGroup.valid"> Přihlásit</p-button>
+  </form>
+</div>
+

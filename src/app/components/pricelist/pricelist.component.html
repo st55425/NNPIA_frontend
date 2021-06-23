@@ -1,0 +1,59 @@
+<h1>Ceník</h1>
+<p-table [columns]="cols" [value]="reservableTypes" dataKey="id">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-reservableType let-expanded="expanded">
+    <tr>
+      <td>
+        <button type="button" pButton pRipple [pRowToggler]="reservableType"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+      <td>{{reservableType.name}}</td>
+      <td>{{reservableType.openFrom}}</td>
+      <td>{{reservableType.openTo}}</td>
+      <td>{{reservableType.defaultPrice}} Kč</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-reservableType>
+    <tr>
+      <td colspan="5">
+        <div class="p-p-3">
+          <p-table [value]="reservableType.prices" dataKey="id">
+            <ng-template pTemplate="header">
+<!--Nechápu tuto chybu, kopírováno z https://www.primefaces.org/primeng/showcase/#/table/rowexpansion
+    Normálně se to zkompiluje-->
+              <tr>
+               <th>Dny v týdnu</th>
+                <th>Od</th>
+                <th>Do</th>
+                <th>Cena</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-price>
+              <tr>
+                <td *ngIf="price.weekDays && price.weekendsAndHolidays">
+                  Každý den
+                </td>
+                <td *ngIf="price.weekDays && !price.weekendsAndHolidays">
+                 Všední dny
+                </td>
+                <td *ngIf="!price.weekDays && price.weekendsAndHolidays">
+                  Víkendy a svátky
+                </td>
+                <td>{{price.timeFrom}}</td>
+                <td>{{price.timeTo}}</td>
+                <td>{{price.price }} Kč</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

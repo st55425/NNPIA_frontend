@@ -1,0 +1,26 @@
+<div class="card">
+  <form (ngSubmit)="onSubmit()" #resForm="ngForm">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="type">Typ Sportoviště</label>
+        <p-dropdown id="type" [options]="types" optionLabel="name" optionValue="id"
+                    [(ngModel)]="court.reservableTypeId" name="type"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="name">Název sportoviště</label>
+        <input type="text" pInputText id="name" [(ngModel)]="court.name" name="name" [required]="true">
+      </div>
+      <div class="p-field">
+        <p-toggleButton [(ngModel)]="court.available" onLabel="Otevřené" offLabel="Zavřené" onIcon="pi pi-check"
+                        offIcon="pi pi-times" [style]="{'width': '10em'}" name="available"></p-toggleButton>
+      </div>
+      <div *ngIf="new">
+        <p-button type="submit" [disabled]="resForm.invalid ?? false">Vytvořit</p-button>
+      </div>
+      <div *ngIf="!new">
+        <p-button type="submit" [disabled]="(resForm.pristine || resForm.invalid) ?? true">Upravit</p-button>
+      </div>
+      <p-messages></p-messages>
+    </div>
+  </form>
+</div>

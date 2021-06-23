@@ -1,0 +1,65 @@
+<div class="card">
+  <form (ngSubmit)="onSubmit()" [formGroup]="resTypeForm">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Název typu sportoviště</label>
+        <input type="text" pInputText id="name" formControlName="name">
+      </div>
+      <div class="p-field">
+        <label for="timeFrom">Otevřeno od</label>
+        <p-calendar id="timeFrom" formControlName="openFrom"
+                    [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="timeTo">Otevřeno do</label>
+        <p-calendar id="timeTo" formControlName="openTo"
+                    [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="price">Cena</label>
+        <input type="text" pInputText id="price" formControlName="defaultPrice">
+      </div>
+      <div class="p-field" formArrayName="prices">
+        <h4>Detaily ceny: </h4>
+        <div *ngFor="let price of pricesCtrl.controls; let i=index" [formGroupName]="i">
+          <!-- The repeated alias template -->
+          <hr>
+          <div>
+            <label for="weekDays-{{ i }}">Všední dny </label>
+            <p-toggleButton id="weekDays-{{ i }}" formControlName="weekDays" onIcon="pi pi-check"
+                               offIcon="pi pi-times"></p-toggleButton>
+          </div>
+          <div>
+            <label for="weekends-{{ i }}">Víkendy </label>
+            <p-toggleButton id="weekends-{{ i }}" formControlName="weekendsAndHolidays" onIcon="pi pi-check"
+                            offIcon="pi pi-times"></p-toggleButton>
+          </div>
+          <div class="p-field">
+            <label for="timeFrom-{{ i }}">Od</label>
+            <p-calendar id="timeFrom-{{ i }}" formControlName="timeFrom"
+                        [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+          </div>
+          <div class="p-field">
+            <label for="timeTo-{{ i }}">Do</label>
+            <p-calendar id="timeTo-{{ i }}" formControlName="timeTo"
+                        [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+          </div>
+          <div class="p-field">
+            <label for="price-{{ i }}">Cena</label>
+            <input type="text" pInputText id="price-{{ i }}" formControlName="price">
+          </div>
+          <hr>
+        </div>
+        <p-button (click)="addPrice()">Add price detail</p-button>
+      </div>
+      <div *ngIf="new">
+        <p-button type="submit" [disabled]="resTypeForm.invalid ?? false">Vytvořit</p-button>
+      </div>
+      <div *ngIf="!new">
+        <p-button type="submit" [disabled]="(resTypeForm.pristine || resTypeForm.invalid) ?? true">Upravit</p-button>
+      </div>
+      <p-messages></p-messages>
+    </div>
+  </form>
+</div>
+

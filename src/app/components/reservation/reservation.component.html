@@ -1,0 +1,15 @@
+<div [formGroup]="formGroup">
+  <h1>Rezervace sportovišť</h1>
+  <label for="typeSelector" >Vyberte typ sportoviště: </label>
+  <p-dropdown id="typeSelector" formControlName="type" [options]="types" optionLabel="name"
+              optionValue="id"></p-dropdown>
+  <label for="courtSelector" >Vyberte sportoviště: </label>
+  <p-dropdown id="courtSelector" formControlName="court" [options]="courts" optionLabel="name"
+              optionValue="id"></p-dropdown>
+  <hr>
+  <div *ngIf="authService.userLoggedInAsync | async">
+    <p-button (onClick)="newReservation()">Nová rezervace</p-button>
+  </div>
+  <app-reservation-calendar [events]="reservations"></app-reservation-calendar>
+</div>
+

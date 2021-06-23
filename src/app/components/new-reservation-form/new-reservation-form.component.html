@@ -1,0 +1,38 @@
+<div class="card">
+  <h1>Nová rezervace</h1>
+  <form (ngSubmit)="onSubmit()" #resForm="ngForm">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="type">Typ Sportoviště</label>
+        <p-dropdown id="type" [options]="types" optionLabel="name" optionValue="id"
+                    [(ngModel)]="reservation.reservableType" name="type"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="court">Sportoviště</label>
+        <p-dropdown id="court" [options]="courts" optionLabel="name" optionValue="id"
+                    [(ngModel)]="reservation.court" name="court"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="date">Datum rezervace</label>
+        <p-calendar id="date" [(ngModel)]="reservation.date" name="date" [required]="true"></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="timeFrom">Od</label>
+        <p-calendar id="timeFrom" [(ngModel)]="reservation.timeFrom" name="timeFrom"
+                    [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="timeTo">Do</label>
+        <p-calendar id="timeTo" [(ngModel)]="reservation.timeTo" name="timeTo"
+                    [readonlyInput]="true" [timeOnly]="true" [stepMinute]="30" [required]="true"></p-calendar>
+      </div>
+      <div class="p-field" *ngIf="privileged">
+        <label for="username">Uživatel</label>
+        <p-dropdown id="username" [options]="users" optionLabel="username" optionValue="username"
+                    [(ngModel)]="reservation.username" name="username"></p-dropdown>
+      </div>
+      <p-button type="submit" [disabled]="resForm.invalid ?? false">Vytvořit</p-button>
+      <p-messages></p-messages>
+    </div>
+  </form>
+</div>
