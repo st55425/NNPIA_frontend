@@ -1,27 +1,35 @@
-# Frontend
+# NNPIA_Sem_Prace
+Semestální práce z předmětu Programování internetových aplikací. Jedná se o Rezervační systém pro sportovní areály
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+Tento repozitář obsahuje pouze frontend dané aplikace
+Komukace s frontendem probíhá skrze rest api
 
-## Development server
+Použité technologie:
+* Angular 
+* Typescript
+* PrimeNg
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Pro zabezpečení endpointů jsou využity jwt tokeny
 
-## Code scaffolding
+Pro nepřihlášené uživatele je zpřístupněna část pro zobrazení jednotlivých sportovišť, přihlášený uživatel (role user)
+může navíc vytvářet a mazat vlastní rezervace, dále správce (role staff) může vytvářet a rušit rezervace všem uživatelům a admin navíc může spravovat sportoviště
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Aplikace prozatím neumožňuje vytvářet a spravovat uživatele, aktuálně aplikace obsahuje 3 uživatele:
 
-## Build
+* uživatelské jméno: user
+* heslo: user
+* role: user
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+* uživatelské jméno: staff
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* heslo: staff
 
-## Running end-to-end tests
+* role: staff
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+* uživatelské jméno: admin
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* heslo: admin
+
+* role: admin
